@@ -3,7 +3,7 @@
 ##Introduction
 
 It will help you build your first WebRTC app in China.
-This project just implement some basic functions, as for some more senior features they are waiting for you to explore.
+This project just implement some basic functions, as for some more senior features of WebRTC they are waiting for you to explore.
 
 ##Why I set up this repository
 
@@ -42,6 +42,7 @@ If you are a novice to one of them, I suggest that you should read one or two pa
 5.Node.js
 
 *I assumed that you are using Windows.
+
 *It also works in an android device.
 
 Thanks to Sam Duton, Adam Ullman, they give me many help when I was studying WebRTC.
