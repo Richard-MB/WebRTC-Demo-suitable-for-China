@@ -22,7 +22,9 @@ most of the WebRTC.
 #Basic Knowledge:
   
 1.Nodejs
+
 2.Javascript and Html/CSS
+
 3.Socket.io
   
 If you are a novice to one of them, I suggest that you should read one or two passeges which introduce it to new hands.
@@ -30,9 +32,13 @@ If you are a novice to one of them, I suggest that you should read one or two pa
 #Installed on your development machine:
 
 1.Google Chrome
+
 2.Code Editor
+
 3.Git
+
 4.Web cam and web audio
+
 5.Node.js
 
 *I assumed that you are using Windows.
