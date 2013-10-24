@@ -3,6 +3,8 @@
 ##Introduction
 
 It based on SamDutton's [Getting started with webRTC](https://bitbucket.org/webrtc/codelab).
+You can find my demo at http://tk.nodejitsu.com/.First click the Private Room button, then invite your friend with the URL.When the browser ask your privilege to use the microphone,click allow.
+Just give it a try!
 This project just implement some basic functions, as for some more senior features of WebRTC they are waiting for you to explore.
 
 ##Why I set up this repository
