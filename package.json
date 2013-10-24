@@ -1,0 +1,16 @@
+{
+  "name": "videoTk",
+  "subdomain": "Tk",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": ">= 1.2.0",
+    "node-static": ">= 0.7.2",
+    "socket.io": ">= 0.9.12"
+  },
+  "version": "0.0.0-2",
+  "engines": {
+    "node": "0.10.x"
+  }
+}

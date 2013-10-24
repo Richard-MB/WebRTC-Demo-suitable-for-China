@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name='keywords' content='WebRTC, HTML5, JavaScript' />
+<meta name='description' content='WebRTC Reference App' />
+<meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1'>
+
+<base target='_blank'>
+
+<style type="text/css">
+body{
+   background:#000;
+   font:bold 12px Arial, Helvetica, sans-serif;
+   margin:0;
+   padding:0;
+   min-width:960px;
+   color:#bbbbbb; 
+}
+
+a { 
+  text-decoration:none; 
+  color:#00c6ff;
+}
+
+h1 {
+  font: 4em normal Arial, Helvetica, sans-serif;
+  padding: 10px 5px 0;  margin: 0;
+  text-align:center;
+  width: 1330px;
+}
+
+h1 small{
+  font: 0.2em normal  Arial, Helvetica, sans-serif;
+  text-transform:uppercase; letter-spacing: 0.2em; line-height: 5em;
+  display: block;
+}
+
+h2 {
+    font-weight:700;
+    color:#bbb;
+    font-size:20px;
+}
+
+h2, p {
+  margin-bottom:10px;
+}
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('BebasNeue-webfont.eot');
+    src: url('BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('BebasNeue-webfont.woff') format('woff'),
+         url('BebasNeue-webfont.ttf') format('truetype'),
+         url('BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.container {position: absolute; right: 100px; top: 158px; width: 500px; margin: 0 auto; overflow: hidden;}
+
+.privateroom {position:absolute; right: 85px; top: 100px;}
+
+.clock {width:800px; margin:0 auto; padding:0px; border:0px solid #333; color:#fff; }
+
+.btnsend{width:188px;  height:74px;  color:#FFF;   background:url("image/button/bg38.jpg") no-repeat left top;  padding-bottom:2px;}
+
+.btn{width:233px; height:67px; background:url("image/button/bg48.jpg") repeat-x left top; color:#8bf8ff;  padding-bottom:18px; font-size:20px; border: 0;}
+
+#content {padding: 5px;background: #ddd;border-radius: 5px;overflow-y: scroll;border: 1px solid #CCC;margin-top: 10px;height: 200px;width: 300px;margin-left: 0;}
+
+#Date { font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; font-size:20px; text-align:center; text-shadow:0 0 5px #00c6ff; }
+
+ul { width:800px; margin:0 auto; padding:0px; list-style:none; text-align:center; }
+ul li { display:inline; font-size:3em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; text-shadow:0 0 5px #00c6ff; }
+
+#point { position:relative; -moz-animation:mymove 1s ease infinite; -webkit-animation:mymove 1s ease infinite; padding-left:10px; padding-right:10px; }
+
+@-webkit-keyframes mymove 
+{
+0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }  
+}
+
+
+@-moz-keyframes mymove 
+{
+0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }  
+}
+</style>
+
+<title>WebRTC client</title>
+
+<!-- <link rel='stylesheet' href='css/main.css' /> -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+<h1 style="color: white;text-shadow: 0 0 5px #00c6ff;">Video and Audio Talking Room
+  <small>Developed By Richard-MB</small>
+</h1>
+<div class='privateroom'><button class='btn' id='privateRoom' onmouseover="this.style.backgroundPosition='left -67px';this.style.color='#d7bff2';" onmouseout="this.style.backgroundPosition='left top';this.style.color='#8bf8ff';">Private Room</button></div>
+
+<div class="container">
+
+<div class="clock">
+<div id="Date"></div>
+
+<ul>
+    <li id="hours"> </li>
+    <li id="point">:</li>
+    <li id="min"> </li>
+    <li id="point">:</li>
+    <li id="sec"> </li>
+</ul>
+
+</div>
+</div>
+<div style='height:45px'></div>
+<div id='videocontainer'>
+  <div id='videos' style='padding: 0'>
+    <video id='localVideo' width='35%' height='320' autoplay muted></video>
+    <video id='remoteVideo' width='35%' height='320' autoplay></video>
+    <div id='content' style="position: relative;left: 1002px;bottom: 260px; width: 280px"></div>
+    <div style="position: relative;left: 1000px;bottom: 240px; width: 310px">
+      <span style="color:#FF3333;font-size: 15px;">Input</span>
+      <input type='text' id='input' style='width:260px'>
+    </div>
+     <button id="sendButton" class='btnsend' style="position: relative; left: 1140px; bottom: 241px;border: 0;" 
+  onmousedown="this.style.color='#000';" onmouseup="this.style.color='#FFF';">Send Message</button> 
+  </div>
+
+  <!-- <div id='textareas' style = 'padding: 0 214px'>
+		<textarea id="dataChannelSend" cols='61' rows='5' placeholder="Enter some text, then press Send."></textarea>
+		<textarea id="dataChannelReceive" cols='61' rows='5' disabled></textarea>
+  </div> -->
+  <!-- <div id='content' style="position: absolute;right: 40px;top: 230px;"></div>
+  <div style="position: absolute;right: 50px;top: 470px;">
+    <span style="color:#FF3333;font-size: 15px;">Input</span>
+    <input type='text' id='input' style='width:260px'>
+  </div> -->
+
+ 
+
+<!--   <div id='enhence'>
+  	<canvas id="canvas1" width="320" height="240"></canvas>
+  	<button id="cameraLocal" type=button>cameralocal</button>
+    <button id="cameraRemote" type=button>cameraremote</button>
+    <button id="reverseButton" type=button onclick="createImageDataTurn()">reverse</button>
+    <button id="proto" type=button onclick="gray()">proto</button>
+    <button id="highlight" type=button onclick="highlight()">highlight</button>
+  </div> -->
+
+</div>
+<script src='/socket.io/socket.io.js'></script>
+<script src='/js/lib/adapter.js'></script>
+<script src='/js/main.js'></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+// Create two variable with the names of the months and days in an array
+var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
+var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+
+// Create a newDate() object
+var newDate = new Date();
+// Extract the current date from Date object
+newDate.setDate(newDate.getDate());
+// Output the day, date, month and year    
+$('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+
+setInterval( function() {
+  // Create a newDate() object and extract the seconds of the current time on the visitor's
+  var seconds = new Date().getSeconds();
+  // Add a leading zero to seconds value
+  $("#sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+  },1000);
+  
+setInterval( function() {
+  // Create a newDate() object and extract the minutes of the current time on the visitor's
+  var minutes = new Date().getMinutes();
+  // Add a leading zero to the minutes value
+  $("#min").html(( minutes < 10 ? "0" : "" ) + minutes);
+    },1000);
+  
+setInterval( function() {
+  // Create a newDate() object and extract the hours of the current time on the visitor's
+  var hours = new Date().getHours();
+  // Add a leading zero to the hours value
+  $("#hours").html(( hours < 10 ? "0" : "" ) + hours);
+    }, 1000);
+  
+}); 
+</script>
+</body>
+</html>
