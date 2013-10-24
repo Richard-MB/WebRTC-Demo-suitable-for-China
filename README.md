@@ -1,8 +1,8 @@
-#WebRTC Demo suitable for China
+#WebRTC Demo build in China
 
 ##Introduction
 
-It will help you build your first WebRTC app in China.
+It based on SamDutton's [Getting started with webRTC](https://bitbucket.org/webrtc/codelab).
 This project just implement some basic functions, as for some more senior features of WebRTC they are waiting for you to explore.
 
 ##Why I set up this repository
